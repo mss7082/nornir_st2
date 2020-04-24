@@ -1,0 +1,51 @@
+---
+r1: 
+  hostname: 172.16.1.11
+  username: salt
+  password: salt123
+  platform: junos
+  groups: [bma]
+  data: 
+    site: dub
+    type: network_device
+    role: router
+r2: 
+  hostname: 172.16.1.12
+  username: salt
+  password: salt123
+  platform: junos
+  groups: [bma]
+  data: 
+    site: dub
+    type: network_device
+    role: router
+r3: 
+  hostname: 172.16.1.13
+  username: salt
+  password: salt123
+  platform: ios
+  groups: [bma]
+  data: 
+    site: dub
+    type: network_device
+    role: router
+r4: 
+  hostname: 172.16.1.14
+  username: salt
+  password: salt123
+  platform: iosxr
+  groups: [bma]
+  data: 
+    site: dub
+    type: network_device
+    role: router
+r5: 
+  hostname: 172.16.1.15
+  username: salt
+  password: salt123
+  platform: ios
+  groups: [bma]
+  data: 
+    site: dub
+    type: network_device
+    role: router

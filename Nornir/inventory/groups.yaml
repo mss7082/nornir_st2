@@ -1,0 +1,19 @@
+---
+global:
+  data:
+    domain: global.local
+    asn: 1
+
+eu:
+  data:
+    asn: 65100
+
+bma:
+  groups:
+    - eu
+    - global
+
+cmh:
+  data:
+    asn: 65000
+

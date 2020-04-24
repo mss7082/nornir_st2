@@ -1,0 +1,715 @@
+2020-04-24 14:40:24,693 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 2 hosts
+2020-04-24 14:47:27,214 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 2 hosts
+2020-04-24 14:48:09,157 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 2 hosts
+2020-04-24 14:49:43,012 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 2 hosts
+2020-04-24 14:51:47,581 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 5 hosts
+2020-04-24 14:52:16,623 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 163, in get_facts
+    facts_rpc_reply = ETREE.fromstring(self.device.make_rpc_call(facts_rpc_request))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 151, in make_rpc_call
+    result = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-24 14:56:05,062 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 5 hosts
+2020-04-24 14:56:33,839 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 163, in get_facts
+    facts_rpc_reply = ETREE.fromstring(self.device.make_rpc_call(facts_rpc_request))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 151, in make_rpc_call
+    result = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-24 14:56:52,343 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 1 hosts
+2020-04-24 14:57:20,634 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 163, in get_facts
+    facts_rpc_reply = ETREE.fromstring(self.device.make_rpc_call(facts_rpc_request))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 151, in make_rpc_call
+    result = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-24 15:08:30,393 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:08:48,180 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:08:51,577 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:39:10,231 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:39:10,235 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 15:39:11,018 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 956, in cli
+    raise TypeError("Please enter a valid list of commands!")
+TypeError: Please enter a valid list of commands!
+
+2020-04-24 15:39:11,019 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'show_commands' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in show_commands
+    task.run(task=networking.napalm_cli, commands="show ip int bri")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_cli at 0x7f3122dd38c8> (failed)
+
+
+2020-04-24 15:39:11,114 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 956, in cli
+    raise TypeError("Please enter a valid list of commands!")
+TypeError: Please enter a valid list of commands!
+
+2020-04-24 15:39:11,115 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'show_commands' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in show_commands
+    task.run(task=networking.napalm_cli, commands="show ip int bri")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_cli at 0x7f3122dd38c8> (failed)
+
+
+2020-04-24 15:40:09,763 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:40:09,767 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 15:40:10,524 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 956, in cli
+    raise TypeError("Please enter a valid list of commands!")
+TypeError: Please enter a valid list of commands!
+
+2020-04-24 15:40:10,524 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'show_commands' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in show_commands
+    task.run(task=networking.napalm_cli, commands="show ip int bri")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_cli at 0x7fd2e39338c8> (failed)
+
+
+2020-04-24 15:40:10,642 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 956, in cli
+    raise TypeError("Please enter a valid list of commands!")
+TypeError: Please enter a valid list of commands!
+
+2020-04-24 15:40:10,642 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'show_commands' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in show_commands
+    task.run(task=networking.napalm_cli, commands="show ip int bri")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_cli at 0x7fd2e39338c8> (failed)
+
+
+2020-04-24 15:40:58,509 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:40:58,513 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 15:44:23,300 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 15:44:23,303 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 16:08:04,904 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 16:08:04,908 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 16:10:12,365 -  nornir.core -     INFO -        run() - Running task 'hi' with args {} on 5 hosts
+2020-04-24 16:10:12,369 -  nornir.core -     INFO -        run() - Running task 'show_commands' with args {} on 2 hosts
+2020-04-24 16:33:43,041 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:33:44,060 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error, expecting '}', ';', or '{'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: None, message: syntax error, expecting '}', ';', or '{')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: None, message: error: syntax error, expecting '}', ';', or '{')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': None, 'message': "syntax error, expecting '}', ';', or '{'"}]
+
+2020-04-24 16:33:44,061 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 23, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f97775ba950> (failed)
+
+
+2020-04-24 16:33:44,143 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error, expecting '}', ';', or '{'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: None, message: syntax error, expecting '}', ';', or '{')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: None, message: error: syntax error, expecting '}', ';', or '{')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': None, 'message': "syntax error, expecting '}', ';', or '{'"}]
+
+2020-04-24 16:33:44,143 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 23, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f97775ba950> (failed)
+
+
+2020-04-24 16:37:50,607 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:37:51,603 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: base.j2, message: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: base.j2, message: error: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': 'base.j2', 'message': 'syntax error'}]
+
+2020-04-24 16:37:51,603 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7fb0ed798950> (failed)
+
+
+2020-04-24 16:37:51,721 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: base.j2, message: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: base.j2, message: error: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': 'base.j2', 'message': 'syntax error'}]
+
+2020-04-24 16:37:51,722 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7fb0ed798950> (failed)
+
+
+2020-04-24 16:38:48,697 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:38:49,723 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: base.j2, message: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: base.j2, message: error: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': 'base.j2', 'message': 'syntax error'}]
+
+2020-04-24 16:38:49,724 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f39eea75950> (failed)
+
+
+2020-04-24 16:38:49,906 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'Loading Configuration on the device' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 777, in execute
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 169, in wrapper
+    raise ex
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 116, in wrapper
+    rsp = function(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 1339, in _rpc_reply
+    return self._conn.rpc(rpc_cmd_e)._NCElement__doc
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/manager.py", line 236, in execute
+    huge_tree=self._huge_tree).request(*args, **kwds)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/third_party/juniper/rpc.py", line 52, in request
+    return self._request(rpc)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/ncclient/operations/rpc.py", line 348, in _request
+    raise self._reply.error
+ncclient.operations.rpc.RPCError: syntax error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 456, in try_load
+    **rpc_xattrs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/rpcmeta.py", line 277, in load_config
+    return self._junos.execute(rpc, ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 76, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/decorators.py", line 31, in wrapper
+    return function(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/device.py", line 797, in execute
+    errs=ex)
+jnpr.junos.exception.RpcError: RpcError(severity: error, bad_element: base.j2, message: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 241, in _load_candidate
+    ignore_warning=self.ignore_warning,
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 539, in load
+    ignore_warning=ignore_warning)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/utils/config.py", line 460, in try_load
+    raise ConfigLoadError(cmd=err.cmd, rsp=err.rsp, errs=err.errs)
+jnpr.junos.exception.ConfigLoadError: ConfigLoadError(severity: error, bad_element: base.j2, message: error: syntax error)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_configure.py", line 32, in napalm_configure
+    device.load_merge_candidate(filename=filename, config=configuration)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 257, in load_merge_candidate
+    self._load_candidate(filename, config, False)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 247, in _load_candidate
+    raise MergeConfigException(e.errs)
+napalm.base.exceptions.MergeConfigException: [{'severity': 'error', 'source': None, 'edit_path': None, 'bad_element': 'base.j2', 'message': 'syntax error'}]
+
+2020-04-24 16:38:49,907 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 24, in basic_configuration
+    replace=False, configuration=task.host["config"])
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure at 0x7f39eea75950> (failed)
+
+
+2020-04-24 16:40:24,960 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:45:16,163 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:46:08,893 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:46:29,110 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:48:58,349 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:49:34,558 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 16:53:02,373 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 17:08:47,793 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {} on 2 hosts
+2020-04-24 17:08:47,797 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'Base Configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/loaders.py", line 115, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/loaders.py", line 197, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: base.j2
+
+2020-04-24 17:08:47,797 - nornir.core.task -    ERROR -      start() - Host 'r3': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 15, in basic_configuration
+    template="base.j2", path=f"templates/{task.host.platform}")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fd20c6a5598> (failed)
+
+
+2020-04-24 17:08:47,798 - nornir.core.task -    ERROR -      start() - Host 'r5': task 'Base Configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/text/template_file.py", line 35, in template_file
+    **kwargs
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/helpers/jinja_helper.py", line 17, in render_from_file
+    t = env.get_template(template)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/loaders.py", line 115, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jinja2/loaders.py", line 197, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: base.j2
+
+2020-04-24 17:08:47,798 - nornir.core.task -    ERROR -      start() - Host 'r5': task 'basic_configuration' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "explore.py", line 15, in basic_configuration
+    template="base.j2", path=f"templates/{task.host.platform}")
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 147, in run
+    raise NornirSubTaskError(task=task, result=r)
+nornir.core.exceptions.NornirSubTaskError: Subtask: <function template_file at 0x7fd20c6a5598> (failed)
+
+
