@@ -1,0 +1,7 @@
+system {
+    name-server {
+       {% for server in host.dns_servers %}
+       {{server}};
+      {% endfor %}
+    }
+}

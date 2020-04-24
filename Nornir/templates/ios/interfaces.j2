@@ -1,0 +1,29 @@
+{# TO DO - Create filter to get network id and network mask from cidr#}
+
+{% for interface_dict in host.interfaces %}
+{% for intf , addr_dict in interface_dict.items() %}
+  {% if "." in intf %}
+  interface {{intf.split(".")[0]}}
+    no shut
+  {% endif %}
+interface {{intf}}
+  {% if "." in intf %}
+  encapsulation dot1Q {{intf.split(".")[1]}}
+  {% endif %}
+  {% if addr_dict.description %}
+  description {{addr_dict.description}}
+  {% endif %}
+  {% if addr_dict.ipv4addr %}
+  ip address {{addr_dict.ipv4addr.split("/")[0]}} 255.255.255.0
+  {% endif %}
+  {% if addr_dict.ipv6addr %}
+  ipv6 address {{addr_dict.ipv6addr}}
+  {% endif %}
+  no shut
+{% endfor -%}
+{% endfor -%}
+interface g4
+  ip address {{host.hostname}} 255.255.255.0
+  no shut
+int lo0
+  ip address {{host.loopbackv4.split("/")[0]}} 255.255.255.255

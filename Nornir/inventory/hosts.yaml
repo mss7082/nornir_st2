@@ -4,31 +4,68 @@ r1:
   username: salt
   password: salt123
   platform: junos
-  groups: [bma]
+  groups:
+    - bma
+    - juniper
   data: 
     site: dub
     type: network_device
     role: router
+    loopbackv4: 1.1.1.1/32
+    interfaces:
+      - ge-0/0/0:
+          units:
+            "0":
+              ipv4addr:
+                - 10.10.1.1/24
+                - 20.10.1.1/24
+              ipv6addr:
+                - 2001:db8:0:5::1/64
+                - 2001:db8:0:6::1/64
 r2: 
   hostname: 172.16.1.12
   username: salt
   password: salt123
   platform: junos
-  groups: [bma]
+  groups:
+    - bma
+    - juniper
   data: 
     site: dub
     type: network_device
     role: router
+    loopbackv4: 2.2.2.2/32
+    interfaces:
+      - ge-0/0/0:
+          units:
+            "0":
+              ipv4addr:
+                - 10.10.1.2/24
+                - 20.10.1.2/24
+              ipv6addr:
+                - 2001:db8:0:5::1/64
+                - 2001:db8:0:6::1/64
 r3: 
   hostname: 172.16.1.13
   username: salt
   password: salt123
   platform: ios
-  groups: [bma]
+  groups:
+    - bma
   data: 
     site: dub
     type: network_device
     role: router
+    loopbackv4: 3.3.3.3/32
+    interfaces:
+      - g1:
+          description: This is a link
+          ipv4addr: 10.10.1.3/24
+          ipv6addr: 2001:db8:0:5::3/64
+      - g2.123:
+          description: This is a link
+          ipv4addr: 33.33.33.33/24
+          ipv6addr: 2001:db8:33:33::33/64
 r4: 
   hostname: 172.16.1.14
   username: salt
@@ -39,6 +76,16 @@ r4:
     site: dub
     type: network_device
     role: router
+    loopbackv4: 4.4.4.4/32
+    interfaces:
+      - GigabitEthernet0/0/0/0:
+          description: This is a link
+          ipv4addr: 10.10.1.4/24
+          ipv6addr: 2001:db8:0:5::4/64
+      - GigabitEthernet0/0/0/1.999:
+          description: This is a link
+          ipv4addr: 30.10.1.4/24
+          ipv6addr: 2001:db8:0:5::4/64
 r5: 
   hostname: 172.16.1.15
   username: salt
@@ -49,3 +96,13 @@ r5:
     site: dub
     type: network_device
     role: router
+    loopbackv4: 5.5.5.5/32
+    interfaces:
+      - g1:
+          description: This is a link
+          ipv4addr: 10.10.1.5/24
+          ipv6addr: 2001:db8:0:5::5/64
+      - g2.123:
+          description: This is a link
+          ipv4addr: 55.55.55.55/24
+          ipv6addr: 2001:db8:55:55::55/64

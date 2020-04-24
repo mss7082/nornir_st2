@@ -1,0 +1,40 @@
+interfaces {
+    {% for interface_dict in host.interfaces %}
+    {% for intf, unit_dict in interface_dict.items() %}
+    {{intf}} {
+        {% for unit_number, address_dict in unit_dict.units.items() %}
+        unit {{unit_number}} {
+            {% if address_dict.ipv4addr %}
+            family inet {
+                {% for ipv4 in address_dict.ipv4addr %}
+                address {{ipv4}};
+                {% endfor %}
+            }
+            {% endif %}
+            {% if address_dict.ipv6addr %}
+            family inet6 {
+                {% for ipv6 in address_dict.ipv6addr %}
+                address {{ipv6}};
+                {% endfor %}
+            }
+                {% endif %}
+        }
+        {% endfor %}
+    }
+    {%- endfor -%}
+    {%- endfor %}
+    lo0 {
+        unit 0 {
+            family inet {
+                address {{host.loopbackv4}};
+            }
+        }
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                address {{host.hostname}};
+            }
+        }
+    }
+}

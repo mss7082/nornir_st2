@@ -1,0 +1,12 @@
+
+system {
+  replace:
+    ntp {
+      {% for server in host.ntp_servers %}
+      server {{server}};
+      {%- endfor %}
+      {% for peer in host.ntp_peers %}
+      peer {{peer}};
+      {%- endfor %}
+    }
+}

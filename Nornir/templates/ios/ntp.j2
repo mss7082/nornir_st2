@@ -1,0 +1,6 @@
+{%- for server in host.ntp_servers %}
+ntp server {{server}}
+{% endfor %}
+{%- for peer in host.ntp_peers %}
+ntp peer {{peer}}
+{% endfor %}

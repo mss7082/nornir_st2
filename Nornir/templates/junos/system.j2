@@ -1,0 +1,56 @@
+system {
+    host-name {{host}};
+    root-authentication {
+        encrypted-password "$6$HM7s7Jwv$l1RDpuCKVnDwDIsIkWzFByfDis/os/gBcoRBRCV8TpnUWgRccyGxcwCwgGG4WuRaUaY17KRXIBDAppUJDiVes1"; ## SECRET-DATA
+    }
+    login {
+    {% for class in host.classes %}
+        class {{class}} {
+            permissions all;
+            deny-commands "start shell";
+        }
+    {% endfor %}
+    {% for user_dict in host.local_users %}
+    {% for user, user_info in user_dict.items() %}
+        user {{user}} {
+            uid {{user_info.uid}};
+            class {{user_info.class}};
+            authentication {
+                encrypted-password "{{user_info.password}}"; ## SECRET-DATA
+            }
+        }
+    {% endfor %}
+    {% endfor %}
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        web-management {
+            http {
+                interface fxp0.0;
+            }
+        }
+    }
+    syslog {
+        archive size 100k files 3;
+        user * {
+            any emergency;
+        }
+        file messages {
+            any critical;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands error;
+        }
+    }
+    max-configurations-on-flash 5;
+    max-configuration-rollbacks 5;
+    license {
+        autoupdate {
+            url https://ae1.juniper.net/junos/key_retrieval;
+        }
+    }
+}
+

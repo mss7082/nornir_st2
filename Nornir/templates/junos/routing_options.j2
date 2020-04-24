@@ -1,0 +1,13 @@
+{% set three_octets =  host.hostname.split('.')[:3] %}
+{% set network = three_octets | join('.') + ".0/24" %}
+{% set gateway = three_octets | join('.') + ".1" %}
+
+
+routing-options {
+    static {
+        route {{network}} {
+            next-hop {{gateway}};
+            no-readvertise;
+        }
+    }
+}
