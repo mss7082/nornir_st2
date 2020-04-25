@@ -1613,3 +1613,365 @@ nornir.core.exceptions.NornirSubTaskError: Subtask: <function napalm_configure a
 2020-04-24 22:39:06,353 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {'template_name': 'dns.j2'} on 2 hosts
 2020-04-24 22:45:39,733 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {'template_name': 'interfaces.j2'} on 2 hosts
 2020-04-24 22:46:02,891 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {'template_name': 'interfaces.j2'} on 2 hosts
+2020-04-24 22:49:59,063 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {'template_name': 'interfaces.j2'} on 2 hosts
+2020-04-24 22:50:29,216 -  nornir.core -     INFO -        run() - Running task 'basic_configuration' with args {'template_name': 'ntp.j2'} on 2 hosts
+2020-04-25 09:40:23,731 -  nornir.core -  WARNING -        run() - Task 'napalm_get' has not been run – 0 hosts selected
+2020-04-25 09:41:11,774 -  nornir.core -  WARNING -        run() - Task 'napalm_get' has not been run – 0 hosts selected
+2020-04-25 09:41:53,033 -  nornir.core -  WARNING -        run() - Task 'napalm_get' has not been run – 0 hosts selected
+2020-04-25 09:42:16,398 -  nornir.core -  WARNING -        run() - Task 'napalm_cli' has not been run – 0 hosts selected
+2020-04-25 09:43:23,620 -  nornir.core -  WARNING -        run() - Task 'napalm_cli' has not been run – 0 hosts selected
+2020-04-25 09:48:10,089 -  nornir.core -     INFO -        run() - Running task 'napalm_cli' with args {'commands': ['show interfaces terse']} on 1 hosts
+2020-04-25 09:48:37,986 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 1 hosts
+2020-04-25 11:17:00,244 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces', 'fxp0']} on 1 hosts
+2020-04-25 11:17:02,260 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 60, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'JunOSDriver' object has no attribute 'get_fxp0'
+
+2020-04-25 11:19:21,843 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['get_interfaces_ip']} on 1 hosts
+2020-04-25 11:19:31,847 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces_ip']} on 1 hosts
+2020-04-25 11:19:37,144 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 1 hosts
+2020-04-25 11:20:06,046 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 1 hosts
+2020-04-25 11:20:20,835 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces_ip']} on 1 hosts
+2020-04-25 11:21:22,323 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['facts']} on 1 hosts
+2020-04-25 11:21:53,721 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 1 hosts
+2020-04-25 11:23:00,873 -  nornir.core -     INFO -        run() - Running task 'napalm_cli' with args {'commands': ['show interfaces terse']} on 1 hosts
+2020-04-25 11:23:35,786 -  nornir.core -     INFO -        run() - Running task 'napalm_cli' with args {'commands': ['show interfaces terse']} on 1 hosts
+2020-04-25 12:49:58,991 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 3 hosts
+2020-04-25 12:50:27,966 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 220, in get_interfaces
+    self.device.make_rpc_call(interfaces_rpc_request)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 151, in make_rpc_call
+    result = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-25 12:57:29,423 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 3 hosts
+2020-04-25 12:57:58,033 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 220, in get_interfaces
+    self.device.make_rpc_call(interfaces_rpc_request)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 151, in make_rpc_call
+    result = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-25 13:03:11,816 -  nornir.core -     INFO -        run() - Running task 'napalm_cli' with args {'commands': ['show version']} on 3 hosts
+2020-04-25 13:03:41,080 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 870, in cli
+    self.device._execute_show(command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 439, in _execute_show
+    response = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-25 13:08:42,039 -  nornir.core -     INFO -        run() - Running task 'napalm_cli' with args {'commands': ['show version']} on 3 hosts
+2020-04-25 13:09:11,413 - nornir.core.task -    ERROR -      start() - Host 'r4': task 'napalm_cli' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 699, in recv
+    out = self.in_buffer.read(nbytes, self.timeout)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/buffered_pipe.py", line 164, in read
+    raise PipeTimeout()
+paramiko.buffered_pipe.PipeTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 550, in _read_channel_expect
+    new_data = self.remote_conn.recv(MAX_BUFFER)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/paramiko/channel.py", line 701, in recv
+    raise socket.timeout()
+socket.timeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_cli.py", line 18, in napalm_cli
+    result = device.cli(commands)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/iosxr/iosxr.py", line 870, in cli
+    self.device._execute_show(command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 439, in _execute_show
+    response = self._execute_rpc(rpc_command)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 365, in _execute_rpc
+    response = self._send_command(xml_rpc_command, delay_factor=delay_factor)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/pyIOSXR/iosxr.py", line 275, in _send_command
+    max_loops=max_loops)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1470, in send_command_expect
+    return self.send_command(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/utilities.py", line 347, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 1389, in send_command
+    new_data = self.read_until_pattern(pattern=re.escape(cmd))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 627, in read_until_pattern
+    return self._read_channel_expect(*args, **kwargs)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/netmiko/base_connection.py", line 561, in _read_channel_expect
+    "Timed-out reading channel, data not available."
+netmiko.ssh_exception.NetmikoTimeoutException: Timed-out reading channel, data not available.
+
+2020-04-25 13:42:45,656 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['interfaces']} on 2 hosts
+2020-04-25 14:09:08,273 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['system']} on 2 hosts
+2020-04-25 14:09:09,032 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 60, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'JunOSDriver' object has no attribute 'get_system'
+
+2020-04-25 14:09:09,189 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 60, in napalm_get
+    method = getattr(device, getter)
+AttributeError: 'JunOSDriver' object has no attribute 'get_system'
+
+2020-04-25 14:14:09,994 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['environment']} on 2 hosts
+2020-04-25 14:21:52,442 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['users']} on 2 hosts
+2020-04-25 14:21:53,653 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 14:21:53,750 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 14:22:08,393 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['users']} on 2 hosts
+2020-04-25 14:22:09,625 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 14:22:09,712 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 15:10:13,085 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['users']} on 2 hosts
+2020-04-25 15:10:14,290 - nornir.core.task -    ERROR -      start() - Host 'r1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 15:10:14,380 - nornir.core.task -    ERROR -      start() - Host 'r2': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/core/task.py", line 85, in start
+    r = self.task(self, **self.params)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/nornir/plugins/tasks/networking/napalm_get.py", line 61, in napalm_get
+    result[g] = method(**options)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2116, in get_users
+    root_user = self._get_root()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/napalm/junos/junos.py", line 2081, in _get_root
+    root_items = root_table.items()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 174, in items
+    return list(zip(self.keys(), self.values()))
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 150, in keys
+    self._key_list = self._keys()
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 134, in _keys
+    return self._keys_simple(xpath + '/' + key_value)
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in _keys_simple
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+  File "/home/gns3/workspace/Nornir/.venv/lib/python3.6/site-packages/jnpr/junos/factory/table.py", line 105, in <listcomp>
+    return [x.text.strip() for x in self.xml.xpath(xpath)]
+AttributeError: 'NoneType' object has no attribute 'strip'
+
+2020-04-25 15:18:49,446 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['config']} on 2 hosts
