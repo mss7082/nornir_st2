@@ -3,8 +3,6 @@
 from secrets import creds
 from nornir import InitNornir
 from pprint import pprint
-import json
-import re
 
 # Tranform Functions
 
