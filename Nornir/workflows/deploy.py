@@ -1,6 +1,5 @@
 #!/home/gns3/workspace/Nornir/.venv/bin/python
 
-from lib.secrets import creds
 from nornir import InitNornir
 from pprint import pprint
 from nornir.plugins.tasks import networking, text
@@ -10,9 +9,6 @@ from nornir.plugins.tasks.version_control import gitlab
 import logging
 
 
-def adapt_user_password(host):
-    host.username = creds[f"{host}"]["username"]
-    host.password = creds[f"{host}"]["password"]
 
 
 
