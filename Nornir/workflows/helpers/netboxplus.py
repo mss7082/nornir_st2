@@ -92,69 +92,6 @@ class NBExInventory(Inventory):
 
         super().__init__(hosts=hosts, groups={}, defaults={}, **kwargs)
 
-    def _get_interfaces_IP(
-        self,
-        nb_url=None,
-        ssl_verify=True,
-        nb_token=None,
-        host_id=None,
-        interface_id=None,
-    ):
-        interfaces = {}
-        interface_list = []
-        result_list = []
-
-        ip_results = self._fetch_data(
-            nb_url=nb_url,
-            ssl_verify=ssl_verify,
-            nb_token=nb_token,
-            interfaces_ip=True,
-            interface_id=interface_id,
-        )
-        # ip_results: List[Dict[str, Any]] = []
-        # ip_url = f"{nb_url}/api/ipam/ip-addresses?device_id={host_id}"
-
-        # session = requests.Session()
-        # session.headers.update({"Authorization": f"Token {nb_token}"})
-        # session.verify = ssl_verify
-
-        # while ip_url:
-        #     r = session.get(ip_url)
-
-        #     if not r.status_code == 200:
-        #         raise ValueError(
-        #             f"Failed to get the IP addresses from Netbox instance {nb_url}"
-        #         )
-
-        #     resp = r.json()
-        #     ip_results.extend(resp.get("results"))
-
-        #     ip_url = resp.get("next")
-
-        for result in ip_results:
-            interface = result["interface"]["name"]
-            if interface not in interface_list:
-                interface_list.append(interface)
-            interface_data = (
-                result["address"],
-                result["family"]["label"],
-                interface,
-            )
-            result_list.append(interface_data)
-
-        for intf in interface_list:
-            interfaces[intf] = {
-                "IPv4": [],
-                "IPv6": [],
-            }
-            for element in result_list:
-                if intf in element:
-                    if "IPv4" in element:
-                        interfaces[intf]["IPv4"].append(element[0])
-                    else:
-                        interfaces[intf]["IPv6"].append(element[0])
-        return interfaces
-
     def _fetch_data(
         self,
         nb_url=None,
