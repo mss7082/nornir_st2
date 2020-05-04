@@ -38,30 +38,13 @@ class NBExInventory(Inventory):
             "NB_TOKEN", "jkdbfgjklsbdfugbsodiufbgsldfjbsdf"
         )
 
-        session = requests.Session()
-        session.headers.update({"Authorization": f"Token {nb_token}"})
-        session.verify = ssl_verify
-
-        # Fetch all deviced from Netbox
-        # Netbox's API uses Pagination, Fetch until no next
-
-        url = f"{nb_url}/api/dcim/devices/?limit=0"
-        ip_url = f"{nb_url}/api/ipam/ip-addresses?device_id="
-        nb_devices: List[Dict[str, Any]] = []
-
-        while url:
-            r = session.get(url, params=filter_parameters)
-
-            if not r.status_code == 200:
-                raise ValueError(
-                    f"Failed to get the devices from Netbox instance {nb_url}"
-                )
-
-            resp = r.json()
-            nb_devices.extend(resp.get("results"))
-
-            url = resp.get("next")
-
+        nb_devices = self._fetch_data(
+            nb_url=nb_url,
+            ssl_verify=ssl_verify,
+            nb_token=nb_token,
+            filter_parameters=filter_parameters,
+            devices=True,
+        )
         hosts = {}
         for d in nb_devices:
             host: HostsDict = {"data": {}}
@@ -95,8 +78,11 @@ class NBExInventory(Inventory):
                 host["platform"] = d["platform"]
 
             # Get the IP addresses assigned to the interfaces of the host
-            host["data"]["interfaces"] = self._get_interfaces_IP(
-                nb_url, ssl_verify, nb_token, d["id"]
+            # host["data"]["interfaces"] = self._get_interfaces_IP(
+            #     nb_url, ssl_verify, nb_token, d["id"]
+            # )
+            host["data"]["interfaces"] = self._get_host_interfaces(
+                nb_url=nb_url, ssl_verify=ssl_verify, nb_token=nb_token, host_id=d["id"]
             )
 
             # Assign temporary dict to outer Dict
@@ -106,29 +92,44 @@ class NBExInventory(Inventory):
 
         super().__init__(hosts=hosts, groups={}, defaults={}, **kwargs)
 
-    def _get_interfaces_IP(self, nb_url, ssl_verify, nb_token, host_id):
+    def _get_interfaces_IP(
+        self,
+        nb_url=None,
+        ssl_verify=True,
+        nb_token=None,
+        host_id=None,
+        interface_id=None,
+    ):
         interfaces = {}
         interface_list = []
         result_list = []
-        ip_results: List[Dict[str, Any]] = []
-        ip_url = f"{nb_url}/api/ipam/ip-addresses?device_id={host_id}"
 
-        session = requests.Session()
-        session.headers.update({"Authorization": f"Token {nb_token}"})
-        session.verify = ssl_verify
+        ip_results = self._fetch_data(
+            nb_url=nb_url,
+            ssl_verify=ssl_verify,
+            nb_token=nb_token,
+            interfaces_ip=True,
+            interface_id=interface_id,
+        )
+        # ip_results: List[Dict[str, Any]] = []
+        # ip_url = f"{nb_url}/api/ipam/ip-addresses?device_id={host_id}"
 
-        while ip_url:
-            r = session.get(ip_url)
+        # session = requests.Session()
+        # session.headers.update({"Authorization": f"Token {nb_token}"})
+        # session.verify = ssl_verify
 
-            if not r.status_code == 200:
-                raise ValueError(
-                    f"Failed to get the IP addresses from Netbox instance {nb_url}"
-                )
+        # while ip_url:
+        #     r = session.get(ip_url)
 
-            resp = r.json()
-            ip_results.extend(resp.get("results"))
+        #     if not r.status_code == 200:
+        #         raise ValueError(
+        #             f"Failed to get the IP addresses from Netbox instance {nb_url}"
+        #         )
 
-            ip_url = resp.get("next")
+        #     resp = r.json()
+        #     ip_results.extend(resp.get("results"))
+
+        #     ip_url = resp.get("next")
 
         for result in ip_results:
             interface = result["interface"]["name"]
@@ -152,4 +153,104 @@ class NBExInventory(Inventory):
                         interfaces[intf]["IPv4"].append(element[0])
                     else:
                         interfaces[intf]["IPv6"].append(element[0])
+        return interfaces
+
+    def _fetch_data(
+        self,
+        nb_url=None,
+        ssl_verify=True,
+        nb_token=None,
+        host_id=None,
+        interface_id=None,
+        filter_parameters=None,
+        devices=False,
+        interfaces=False,
+        interfaces_ip=False,
+    ):
+        """
+        Fetch data from Netbox API based on flags:
+
+        devices=False - Fetch all devices from Netbox
+        interfaces=False - Fetch akl interfaces data for a specific host
+        interfaces_ip = False - Fetch all IP addresses for a specific interface on specific host
+
+        devices, interfaces and interfaces_ip are mutually exclusive
+
+        """
+        results: List[Dict[str, Any]] = []
+        if devices:
+            url = f"{nb_url}/api/dcim/devices/?limit=0"
+            interfaces = False
+            interfaces_ip = False
+
+        if interfaces_ip:
+            url = f"{nb_url}/api/ipam/ip-addresses?device_id={host_id}&interface_id={interface_id}"
+            interfaces = False
+            devices = False
+
+        if interfaces:
+            url = f"{nb_url}/api/dcim/interfaces?device_id={host_id}"
+            devices = False
+            interfaces_ip = False
+
+        session = requests.Session()
+        session.headers.update({"Authorization": f"Token {nb_token}"})
+        session.verify = ssl_verify
+
+        # Fetch all deviced from Netbox
+        # Netbox's API uses Pagination, Fetch until no nex
+
+        while url:
+            if devices:
+                r = session.get(url, params=filter_parameters)
+            else:
+                r = session.get(url)
+
+            if not r.status_code == 200:
+                raise ValueError(
+                    f"Failed to get the IP addresses from Netbox instance {nb_url}"
+                )
+
+            resp = r.json()
+            results.extend(resp.get("results"))
+
+            url = resp.get("next")
+        return results
+
+    def _get_host_interfaces(self, nb_url, ssl_verify, nb_token, host_id):
+
+        interfaces_list = []
+        interfaces = {}
+
+        interfaces_results = self._fetch_data(
+            nb_url=nb_url,
+            ssl_verify=ssl_verify,
+            nb_token=nb_token,
+            host_id=host_id,
+            interfaces=True,
+        )
+
+        for interface_dict in interfaces_results:
+            interfaces_list.append(interface_dict["name"])
+
+        for interface in interfaces_list:
+            for interface_dict in interfaces_results:
+                if interface == interface_dict["name"]:
+                    interfaces[interface] = {}
+                    interfaces[interface]["id"] = interface_dict["id"]
+                    # Check if interface is member of a LAG
+                    if interface_dict["lag"] != None:
+                        interfaces[interface]["lag"] = {}
+                        interfaces[interface]["lag"]["name"] = interface_dict["lag"][
+                            "name"
+                        ]
+                        interfaces[interface]["lag"]["id"] = interface_dict["lag"]["id"]
+
+                    interfaces[interface]["mtu"] = interface_dict["mtu"]
+                    interfaces[interface]["enabled"] = interface_dict["enabled"]
+                    interfaces[interface]["description"] = interface_dict["description"]
+                    interfaces[interface]["ipaddresses_count"] = interface_dict[
+                        "count_ipaddresses"
+                    ]
+
         return interfaces

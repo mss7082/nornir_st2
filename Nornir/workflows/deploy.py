@@ -9,37 +9,33 @@ from nornir.plugins.tasks.version_control import gitlab
 import logging
 
 
-
-
-
 def main():
-        # template = "ntp.j2"
-        nr = InitNornir(config_file="../config.yaml")
-        # pprint(nr.inventory.get_inventory_dict()["hosts"])
-        juniper = nr.filter(platform="junos")
-        pprint(juniper.inventory.get_hosts_dict())
-        # rgit = juniper.run(task=get_template, template=template)
-        # print_result(rgit)
-        # rconfig = juniper.run(task=push_config, template=template)
-        # print_result(rconfig)
-        
+    # template = "ntp.j2"
+    nr = InitNornir(config_file="../config.yaml")
+    # pprint(nr.inventory.get_inventory_dict()["hosts"])
+    juniper = nr.filter(platform="junos")
+    pprint(juniper.inventory.get_hosts_dict())
+    # rgit = juniper.run(task=get_template, template=template)
+    # print_result(rgit)
+    # rconfig = juniper.run(task=push_config, template=template)
+    # print_result(rconfig)
+
 
 def get_template(task, template):
     print("Getting template from gitlab")
     r = task.run(
-        task=gitlab, 
-        action="get", 
-        url="http://gitlab.mss.com", 
-        token="yfP7ecnFpzRXDUsxzyg4", 
-        repository="Nornir_Templates", 
-        ref="master", 
+        task=gitlab,
+        action="get",
+        url="http://gitlab.mss.com",
+        token="yfP7ecnFpzRXDUsxzyg4",
+        repository="Nornir_Templates",
+        ref="master",
         filename=template,
-        # filename=f"{task.host.platform}/{template}", 
-        destination="/tmp/hosts", 
-        severity_level=logging.DEBUG
-        )
+        # filename=f"{task.host.platform}/{template}",
+        destination="/tmp/hosts",
+        severity_level=logging.DEBUG,
+    )
     print_result(r)
-    
 
 
 def push_config(task, template):
@@ -49,18 +45,19 @@ def push_config(task, template):
         name="Generate config from template",
         template="hosts",
         path="/tmp",
-        severity_level=logging.DEBUG
+        severity_level=logging.DEBUG,
     )
     task.host["config"] = result.result
 
-
     # Deploy that configuration to the device using NAPALM
-    task.run(task=networking.napalm_configure,
-             name="Loading Configuration on the device",
-             replace=False,
-             dry_run=True,
-             configuration=task.host["config"],
-             severity_level=logging.DEBUG
-             )
+    task.run(
+        task=networking.napalm_configure,
+        name="Loading Configuration on the device",
+        replace=False,
+        dry_run=True,
+        configuration=task.host["config"],
+        severity_level=logging.DEBUG,
+    )
+
 
 main()
