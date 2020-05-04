@@ -221,6 +221,7 @@ class NBExInventory(Inventory):
 
         interfaces_list = []
         interfaces = {}
+        ip_interface_list = []
 
         interfaces_results = self._fetch_data(
             nb_url=nb_url,
@@ -237,6 +238,8 @@ class NBExInventory(Inventory):
             for interface_dict in interfaces_results:
                 if interface == interface_dict["name"]:
                     interfaces[interface] = {}
+                    interfaces[interface]["IPv4"] = []
+                    interfaces[interface]["IPv6"] = []
                     interfaces[interface]["id"] = interface_dict["id"]
                     # Check if interface is member of a LAG
                     if interface_dict["lag"] != None:
@@ -249,8 +252,31 @@ class NBExInventory(Inventory):
                     interfaces[interface]["mtu"] = interface_dict["mtu"]
                     interfaces[interface]["enabled"] = interface_dict["enabled"]
                     interfaces[interface]["description"] = interface_dict["description"]
-                    interfaces[interface]["ipaddresses_count"] = interface_dict[
-                        "count_ipaddresses"
-                    ]
+                    # Get the Ip addresses for interfaces that have IP addresses defined in
+
+                    if interface_dict["count_ipaddresses"] >= 1:
+                        ip_results = self._fetch_data(
+                            nb_url=nb_url,
+                            ssl_verify=ssl_verify,
+                            nb_token=nb_token,
+                            host_id=host_id,
+                            interface_id=interface_dict["id"],
+                            interfaces_ip=True,
+                        )
+
+                        for intf_ip_dict in ip_results:
+                            interface_ip_tuple = (
+                                intf_ip_dict["address"],
+                                intf_ip_dict["family"]["label"],
+                                interface,
+                            )
+                            ip_interface_list.append(interface_ip_tuple)
+
+                    for element in ip_interface_list:
+                        if interface in element:
+                            if "IPv4" in element:
+                                interfaces[interface]["IPv4"].append(element[0])
+                            else:
+                                interfaces[interface]["IPv6"].append(element[0])
 
         return interfaces
