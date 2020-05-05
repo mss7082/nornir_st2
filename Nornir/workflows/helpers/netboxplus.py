@@ -1,4 +1,5 @@
 import os
+import math
 from pprint import pprint
 from typing import Any, Dict, List, Optional, Union
 
@@ -188,6 +189,9 @@ class NBExInventory(Inventory):
         interfaces_list = []
         interfaces = {}
         ip_interface_list = []
+        lag_members = []
+        lags_list = []
+        lags = {}
 
         interfaces_results = self._fetch_data(
             nb_url=nb_url,
@@ -214,11 +218,14 @@ class NBExInventory(Inventory):
                             "name"
                         ]
                         interfaces[interface]["lag"]["id"] = interface_dict["lag"]["id"]
+                        lag_info = interface, interface_dict["lag"]["name"]
+                        lag_members.append(lag_info)
 
                     interfaces[interface]["mtu"] = interface_dict["mtu"]
                     interfaces[interface]["enabled"] = interface_dict["enabled"]
                     interfaces[interface]["description"] = interface_dict["description"]
-                    # Get the Ip addresses for interfaces that have IP addresses defined in
+
+                    # Get the Ip addresses for interfaces that have IP addresses defined
 
                     if interface_dict["count_ipaddresses"] >= 1:
                         ip_results = self._fetch_data(
@@ -244,5 +251,25 @@ class NBExInventory(Inventory):
                                 interfaces[interface]["IPv4"].append(element[0])
                             else:
                                 interfaces[interface]["IPv6"].append(element[0])
+
+        # Get the min-links for the LAG interfaces
+
+        # Create a list of LAGs from the tuple list
+        for lag_tuple in lag_members:
+            if lag_tuple[1] not in lags_list:
+                lags_list.append(lag_tuple[1])
+
+        # Create a dict of lag, List[str] of members pair
+        for lag in lags_list:
+            lags[lag] = []
+            for element in lag_members:
+                if lag in element:
+                    lags[lag].append(element[0])
+
+        # Calculate min-links from the lags dict.
+        for lag in lags.keys():
+            num_members = len(lags[lag])
+            min_links = math.ceil(0.5 * num_members)
+            interfaces[lag]["min-links"] = min_links
 
         return interfaces
