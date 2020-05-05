@@ -3,6 +3,7 @@ from pprint import pprint
 from typing import Any, Dict, List, Optional, Union
 
 from nornir.core.deserializer.inventory import Inventory, HostsDict
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
 import requests
@@ -43,7 +44,7 @@ class NBExInventory(Inventory):
             ssl_verify=ssl_verify,
             nb_token=nb_token,
             filter_parameters=filter_parameters,
-            devices=True,
+            get_devices=True,
         )
         hosts = {}
         for d in nb_devices:
@@ -78,12 +79,27 @@ class NBExInventory(Inventory):
                 host["platform"] = d["platform"]
 
             # Get the IP addresses assigned to the interfaces of the host
-            # host["data"]["interfaces"] = self._get_interfaces_IP(
-            #     nb_url, ssl_verify, nb_token, d["id"]
-            # )
             host["data"]["interfaces"] = self._get_host_interfaces(
                 nb_url=nb_url, ssl_verify=ssl_verify, nb_token=nb_token, host_id=d["id"]
             )
+
+            # Get Site ASN and custom fields for the host.
+            site_results = self._fetch_data(
+                nb_url=nb_url,
+                ssl_verify=ssl_verify,
+                nb_token=nb_token,
+                get_site_data=True,
+            )
+
+            for site_result in site_results:
+                if site_result["id"] == d["site"]["id"]:
+                    host["data"]["asn"] = site_result["asn"]
+
+                if flatten_custom_fields:
+                    for site_cf, value in site_result["custom_fields"].items():
+                        host["data"][site_cf] = value
+                else:
+                    host["data"]["custom_fields"] = site_result["custom_fields"]
 
             # Assign temporary dict to outer Dict
             # Netbos allows devices to be unnamed, but the Nornir model doesn't.
@@ -99,37 +115,50 @@ class NBExInventory(Inventory):
         nb_token=None,
         host_id=None,
         interface_id=None,
+        site_id=None,
         filter_parameters=None,
-        devices=False,
-        interfaces=False,
-        interfaces_ip=False,
+        get_devices=False,
+        get_interfaces=False,
+        get_interfaces_ip=False,
+        get_site_data=False,
     ):
         """
         Fetch data from Netbox API based on flags:
 
-        devices=False - Fetch all devices from Netbox
-        interfaces=False - Fetch akl interfaces data for a specific host
-        interfaces_ip = False - Fetch all IP addresses for a specific interface on specific host
+        get_devices=False - Fetch all devices from Netbox
+        get_interfaces=False - Fetch all interfaces data for a specific host
+        get_interfaces_ip = False - Fetch all IP addresses for a specific interface on specific host
+        get_site_data = False - Fetch all the site data and custom fields for the host's site
 
-        devices, interfaces and interfaces_ip are mutually exclusive
+        get_devices, get_interfaces, get_site_data and get_interfaces_ip are mutually exclusive
 
         """
         results: List[Dict[str, Any]] = []
-        if devices:
+        if get_devices:
             url = f"{nb_url}/api/dcim/devices/?limit=0"
-            interfaces = False
-            interfaces_ip = False
+            get_interfaces = False
+            get_interfaces_ip = False
+            get_site_data = False
 
-        if interfaces_ip:
+        if get_interfaces_ip:
             url = f"{nb_url}/api/ipam/ip-addresses?device_id={host_id}&interface_id={interface_id}"
-            interfaces = False
-            devices = False
+            get_interfaces = False
+            get_devices = False
+            get_site_data = False
 
-        if interfaces:
+        if get_interfaces:
             url = f"{nb_url}/api/dcim/interfaces?device_id={host_id}"
-            devices = False
-            interfaces_ip = False
+            get_devices = False
+            get_interfaces_ip = False
+            get_site_data = False
 
+        if get_site_data:
+            url = f"{nb_url}/api/dcim/sites/"
+            get_devices = False
+            get_interfaces_ip = False
+            get_interfaces = False
+
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         session = requests.Session()
         session.headers.update({"Authorization": f"Token {nb_token}"})
         session.verify = ssl_verify
@@ -138,7 +167,7 @@ class NBExInventory(Inventory):
         # Netbox's API uses Pagination, Fetch until no nex
 
         while url:
-            if devices:
+            if get_devices:
                 r = session.get(url, params=filter_parameters)
             else:
                 r = session.get(url)
@@ -165,7 +194,7 @@ class NBExInventory(Inventory):
             ssl_verify=ssl_verify,
             nb_token=nb_token,
             host_id=host_id,
-            interfaces=True,
+            get_interfaces=True,
         )
 
         for interface_dict in interfaces_results:
@@ -198,7 +227,7 @@ class NBExInventory(Inventory):
                             nb_token=nb_token,
                             host_id=host_id,
                             interface_id=interface_dict["id"],
-                            interfaces_ip=True,
+                            get_interfaces_ip=True,
                         )
 
                         for intf_ip_dict in ip_results:
