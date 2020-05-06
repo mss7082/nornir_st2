@@ -1,40 +1,66 @@
 interfaces {
-    {% for interface_dict in host.interfaces %}
-    {% for intf, unit_dict in interface_dict.items() %}
+    {% for interface, interface_dict in host.interfaces.items() %}
+    {% set lag_intf = False %}
+
+    {% if "ae" in interface %}
+    {% set lag_intf = True %}
+    {% endif -%}
+
+    {% if "." in interface %}
+        {% set intf = interface.split(".")[0] %}
+        {% set unit = interface.split(".")[1] %}
+    {% else %}
+        {% set intf = interface %}
+        {% set unit = "0" %}
+    {% endif %}
+
     {{intf}} {
-        {% for unit_number, address_dict in unit_dict.units.items() %}
-        unit {{unit_number}} {
-            {% if address_dict.ipv4addr %}
+
+        {% if interface_dict.description != "" %}
+            description "{{ interface_dict.description }}";
+        {% endif %}
+
+        {# Check if the interface is member of a LAG #}
+        {% if interface_dict.lag is defined %}
+            gigether-options {
+            802.3ad {{ interface_dict.lag.name }};
+            }
+
+        {% else %}
+            {% if interface_dict.mtu != None %}
+            mtu {{ interface_dict.mtu }};
+            {% endif %}
+
+
+            {# Check if the interface is a LAG #}
+            {% if lag_intf %}
+                aggregated-ether-options {
+                    minimum-links {{ interface_dict.min_links }};
+                    lacp {
+                        active;
+                    }
+                }
+            {% endif %}
+
+
+            unit {{unit}} {
+            {% if interface_dict.IPv4|length >= 1 %}
             family inet {
-                {% for ipv4 in address_dict.ipv4addr %}
+                {% for ipv4 in interface_dict.IPv4 %}
                 address {{ipv4}};
                 {% endfor %}
             }
             {% endif %}
-            {% if address_dict.ipv6addr %}
+            {% if interface_dict.IPv6|length >= 1 %}
             family inet6 {
-                {% for ipv6 in address_dict.ipv6addr %}
+                {% for ipv6 in interface_dict.IPv6 %}
                 address {{ipv6}};
                 {% endfor %}
             }
                 {% endif %}
-        }
-        {% endfor %}
-    }
-    {%- endfor -%}
-    {%- endfor %}
-    lo0 {
-        unit 0 {
-            family inet {
-                address {{host.loopbackv4}};
             }
-        }
+        {% endif %}
     }
-    fxp0 {
-        unit 0 {
-            family inet {
-                address {{host.hostname}};
-            }
-        }
-    }
+    {% endfor %}
+
 }

@@ -1,7 +1,6 @@
 system {
     name-server {
-       {% for server in host.dns_servers %}
-       {{server}};
-      {% endfor %}
+       {{host.dns_server_a}};
+       {{host.dns_server_b}};
     }
 }

@@ -4,23 +4,15 @@ system {
         encrypted-password "$6$HM7s7Jwv$l1RDpuCKVnDwDIsIkWzFByfDis/os/gBcoRBRCV8TpnUWgRccyGxcwCwgGG4WuRaUaY17KRXIBDAppUJDiVes1"; ## SECRET-DATA
     }
     login {
-    {% for class in host.classes %}
-        class {{class}} {
+        class supervisor {
             permissions all;
             deny-commands "start shell";
         }
-    {% endfor %}
-    {% for user_dict in host.local_users %}
-    {% for user, user_info in user_dict.items() %}
-        user {{user}} {
-            uid {{user_info.uid}};
-            class {{user_info.class}};
+        user {{host.username}} {
             authentication {
-                encrypted-password "{{user_info.password}}"; ## SECRET-DATA
+                encrypted-password "$6$xtNXMYBSMkLYWPvq$2wrz3JcSaA.rFKOY66boZ3ubXtZcS5cYwBsA0xDWzf/3buUu7MQUAc9qI63QZGt.c4LGR.oRhX2xq2O3QAvnt."; ## SECRET-DATA
             }
         }
-    {% endfor %}
-    {% endfor %}
     }
     services {
         ssh {

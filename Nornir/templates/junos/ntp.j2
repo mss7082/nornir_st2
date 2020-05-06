@@ -1,12 +1,9 @@
 
 system {
-  replace:
     ntp {
-      {% for server in host.ntp_servers %}
-      server {{server}};
-      {%- endfor %}
-      {% for peer in host.ntp_peers %}
-      peer {{peer}};
-      {%- endfor %}
+      server {{host.ntp_server_a}};
+      server {{host.ntp_server_b}};
+      peer {{host.ntp_peer_a}};
+      peer {{host.ntp_peer_b}};
     }
 }

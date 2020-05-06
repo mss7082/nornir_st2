@@ -10,44 +10,43 @@ import logging
 
 
 def main():
-    # template = "ntp.j2"
+    template = "interfaces.j2"
     nr = InitNornir(config_file="../config.yaml")
     # pprint(nr.inventory.get_inventory_dict()["hosts"])
     juniper = nr.filter(platform="junos")
-    pprint(juniper.inventory.get_hosts_dict())
+    # pprint(juniper.inventory.get_hosts_dict())
     # rgit = juniper.run(task=get_template, template=template)
     # print_result(rgit)
-    # rconfig = juniper.run(task=push_config, template=template)
-    # print_result(rconfig)
+    rconfig = juniper.run(task=push_config, template=template)
+    print_result(rconfig)
 
 
-def get_template(task, template):
-    print("Getting template from gitlab")
-    r = task.run(
-        task=gitlab,
-        action="get",
-        url="http://gitlab.mss.com",
-        token="yfP7ecnFpzRXDUsxzyg4",
-        repository="Nornir_Templates",
-        ref="master",
-        filename=template,
-        # filename=f"{task.host.platform}/{template}",
-        destination="/tmp/hosts",
-        severity_level=logging.DEBUG,
-    )
-    print_result(r)
+# def get_template(task, template):
+#     print("Getting template from gitlab")
+#     r = task.run(
+#         task=gitlab,
+#         action="get",
+#         url="http://gitlab.mss.com",
+#         token="yfP7ecnFpzRXDUsxzyg4",
+#         repository="Nornir_Templates",
+#         ref="master",
+#         filename=template,
+#         # filename=f"{task.host.platform}/{template}",
+#         destination="/tmp/hosts",
+#         severity_level=logging.DEBUG,
+#     )
+#     print_result(r)
 
 
 def push_config(task, template):
     print("Render and Push config")
-    result = task.run(
+    r = task.run(
         task=text.template_file,
         name="Generate config from template",
-        template="hosts",
-        path="/tmp",
-        severity_level=logging.DEBUG,
+        template=template,
+        path=f"../templates/{task.host.platform}",
     )
-    task.host["config"] = result.result
+    task.host["config"] = r.result
 
     # Deploy that configuration to the device using NAPALM
     task.run(
@@ -56,7 +55,6 @@ def push_config(task, template):
         replace=False,
         dry_run=True,
         configuration=task.host["config"],
-        severity_level=logging.DEBUG,
     )
 
 

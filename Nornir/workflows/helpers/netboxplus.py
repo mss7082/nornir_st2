@@ -270,6 +270,6 @@ class NBExInventory(Inventory):
         for lag in lags.keys():
             num_members = len(lags[lag])
             min_links = math.ceil(0.5 * num_members)
-            interfaces[lag]["min-links"] = min_links
+            interfaces[lag]["min_links"] = min_links
 
         return interfaces
