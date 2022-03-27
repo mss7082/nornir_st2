@@ -37,3 +37,4 @@ def main():
     srx_devices = nr.filter(F(platform="junos"))
 
     result = srx_devices.run(task=add_new_user)
+    #result = srx_devices.run(task=add_new_user)
